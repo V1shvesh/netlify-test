@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 exports.createPages = async ({ actions: { createPage }, graphql }) => {
   const results = await graphql(`
     query CreatePages {
@@ -17,6 +19,7 @@ exports.createPages = async ({ actions: { createPage }, graphql }) => {
       context: {
         slug: blogPage.slug,
       },
+      defer: process.env.IS_PREVIEW ? true : false,
     })
   })
 }
