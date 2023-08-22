@@ -16,8 +16,9 @@ const config: GatsbyConfig = {
   plugins: [{
     resolve: 'gatsby-source-contentful',
     options: {
-      "accessToken": process.env.CONTENTFUL_ACCESS_TOKEN,
-      "spaceId": process.env.CONTENTFUL_SPACE_ID,
+      accessToken: process.env.IS_PREVIEW === "true" ? process.env.CONTENTFUL_PREVIEW_TOKEN: process.env.CONTENTFUL_DELIVERY_TOKEN,
+      spaceId: process.env.CONTENTFUL_SPACE_ID,
+      host: process.env.IS_PREVIEW === "true" ? "preview.contentful.com" : "cdn.contentful.com"
     }
   }, "gatsby-plugin-image", "gatsby-plugin-sharp", "gatsby-transformer-sharp"]
 };
